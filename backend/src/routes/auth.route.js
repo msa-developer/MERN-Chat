@@ -14,7 +14,7 @@ authRouter.post("/logout", logout);
 authRouter.post("/login", login);
 authRouter.put("/update_profile", authenticateUser, updateProfile);
 authRouter.get("/check", authenticateUser, (req, res) =>
-  res.status(200).json(req.user._id),
+  res.status(200).json(req.user),
 );
 
 export default authRouter;
