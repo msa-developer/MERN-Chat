@@ -1,23 +1,26 @@
-import { v2 as cloudinary } from "cloudinary";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
-import { generateToken } from "../lib/generateToken.js";
+import { v2 as cloudinary } from "cloudinary";
+import generateToken from "../lib/generateToken.js";
 
 export const signup = async (req, res) => {
   const { fullName, email, password, profilePic } = req.body;
   try {
     if (!fullName || !email || !password)
-      return res.status(400).json({ message: "Please fill all the details" });
+      return res.status(500).json({ message: "Please fill all the details" });
+
+    if (password.length < 6)
+      return res
+        .status(400)
+        .json({ message: "Password should be minimum 6 Characters" });
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({ message: "Invalid Email" });
     }
 
-    if (password.length < 6)
-      return res
-        .status(400)
-        .json({ message: "Password should be minimum 6 characters" });
+    const user = await User.findOne({ email });
+    if (user) return res.status(400).json({ message: "Email Already In Use" });
 
     let profileUrl = null;
     if (profilePic) {
@@ -38,79 +41,73 @@ export const signup = async (req, res) => {
     if (newUser) {
       await newUser.save();
       generateToken(newUser._id, res);
-      res.status(201).json({
-        createdAt: newUser.createdAt,
-        updatedAt: newUser.updatedAt,
-        _id: newUser._id,
-        fullName: newUser.fullName,
-        email: newUser.email,
-        password: newUser.password,
-        profilePic: newUser.profilePic,
-      });
+      res.status(201).json(newUser);
     } else {
-      res.status(500).json({ message: "Something went wrong" });
+      res.status(400).json({ message: "failed to create new User" });
     }
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Error in signup function" });
   }
 };
 
-export const logout = async (req, res) => {
-  res.cookie("jwt", "", {
-    maxAge: 0,
-  });
-  res.status(200).json({ message: "user logged out successfully" });
-};
-
 export const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { password, email } = req.body;
   try {
-    if (!email || !password)
-      return res.status(400).json({ message: "Please fill all the details" });
+    if (!password || !email)
+      return res.status(200).json({ message: "Please fll all the details" });
+
+    if (password.length < 6)
+      return res
+        .status(400)
+        .json({ message: "Password should be minimum 6 Characters" });
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({ message: "Invalid Email" });
     }
-    if (password.length < 6)
-      return res
-        .status(400)
-        .json({ message: "Password should be minimum 6 characters" });
 
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: "user does not exists" });
+    if (!user) return res.status(400).json({ message: "User does not exists" });
 
     const comparePass = await bcrypt.compare(password, user.password);
     if (!comparePass)
-      return res.status(400).json({ message: "Incorrect password" });
+      return res.status(400).json({ message: "Invalid Password" });
 
     generateToken(user._id, res);
-    res.status(200).json({ message: "user logged In successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error in login function" });
+
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error In login function" });
   }
+};
+
+export const logout = async (_, res) => {
+  res.cookie("jwt", "", {
+    maxAge: 0,
+  });
+  res.status(200).json({ message: "User logged out successfully" });
 };
 
 export const updateProfile = async (req, res) => {
   const { profilePic } = req.body;
   try {
     if (!profilePic)
-      return res
-        .status(400)
-        .json({ message: "Please update the profile Picture" });
+      return res.status(400).json({ message: "Please upload the profile" });
 
-    const uploadedProfile = await cloudinary.uploader.upload(profilePic);
-    const profileUrl = uploadedProfile.secure_url;
+    let profileUrl = null;
+    if (profilePic) {
+      const uploadedProfile = await cloudinary.uploader.upload(profilePic);
+      profileUrl = uploadedProfile.secure_url;
+    }
 
-    await User.findByIdUpdate(req.user._id, {
+    await User.findByIdAndUpdate(req.user._id, {
       profilePic: profileUrl,
     });
 
-    res.status(200).json(profileUrl);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error in updateProfile function" });
+    res.status(200).json({ message: "Updated the profile SuccessFully" });
+  } catch (err) {
+    console.error(err);
   }
 };

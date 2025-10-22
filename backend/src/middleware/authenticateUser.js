@@ -1,19 +1,22 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-export const authenticateUser = async (req, res, next) => {
+
+const authenticateUser = async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
     if (!token)
       return res
-        .status(401)
-        .json({ message: "token does not exists user is not authenticated" });
+        .status(403)
+        .json({ message: "Invalid User Not authenticated" });
 
-    const verifyToken = jwt.verify(token, process.env.jwt_secret);
-    if (!verifyToken)
-      return res.status(401).json({ message: "User has token but not valid" });
+    const decode = jwt.verify(token, process.env.jwt_secret);
+    if (!decode)
+      return res
+        .status(403)
+        .json({ message: "token exists but user not authenticated" });
 
-    const user = await User.findById(verifyToken.userId).select("-password");
-    if (!user) return res.status(404).json({ message: "User not found" });
+    const user = await User.findById(decode.userId).select("-password");
+    if (!user) return res.status(404).json({ message: "user not found" });
 
     req.user = user;
     next();
@@ -22,3 +25,5 @@ export const authenticateUser = async (req, res, next) => {
     next(error);
   }
 };
+
+export default authenticateUser;
