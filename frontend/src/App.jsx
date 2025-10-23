@@ -1,16 +1,18 @@
-import toast from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router";
-import ChatPage from "./Pages/ChatPage.jsx";
+import ChatPage from "./Pages/ChatPage";
+import useAuth from "./zustand/useAuth";
+import { useEffect } from "react";
 import LoginPage from "./Pages/LoginPage.jsx";
 import SignInPage from "./Pages/SignInPage.jsx";
-import useAuth from "./zustand/auth.js";
-import { useEffect } from "react";
 
 const App = () => {
-  const { user, checkUser } = useAuth();
+  const { user, checkAuth } = useAuth();
+
   useEffect(() => {
-    checkUser();
+    checkAuth();
   }, []);
+
+  console.log("user is : ", user);
 
   return (
     <div className="min-h-screen" data-theme="night">
@@ -24,7 +26,7 @@ const App = () => {
           element={!user ? <LoginPage /> : <Navigate to={"/"} />}
         />
         <Route
-          path="/signup"
+          path="/singnIn"
           element={!user ? <SignInPage /> : <Navigate to={"/"} />}
         />
       </Routes>

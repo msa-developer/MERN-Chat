@@ -1,18 +1,16 @@
-import useAuth from "../zustand/auth";
+import useAuth from "../zustand/useAuth";
 
 const ChatPage = () => {
-  const { loading, logout } = useAuth();
+  const { logout } = useAuth();
+
   const handleLogout = () => {
     logout();
   };
+
   return (
     <div>
-      <button
-        disabled={loading}
-        onClick={handleLogout}
-        className="btn btn-primary"
-      >
-        {loading ? "LogginOut..." : "Logout"}
+      <button onClick={handleLogout} className="btn btn-primary">
+        Logout
       </button>
     </div>
   );

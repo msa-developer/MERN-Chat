@@ -1,67 +1,72 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import useAuth from "../zustand/auth";
+import useAuth from "../zustand/useAuth";
 
-const SignupPage = () => {
-  const [information, setInformation] = useState({
+const SignInPage = () => {
+  const { signIn } = useAuth();
+  const [data, setData] = useState({
     fullName: "",
     email: "",
     password: "",
   });
 
-  const { loading, signin } = useAuth();
   const handleSignIn = () => {
-    signin(information);
+    signIn(data);
   };
   return (
-    <main className="flex items-center justify-center h-screen">
-      <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-2xl border p-4">
-        <legend className="fieldset-legend text-lg">SignIn</legend>
+    <main className=" min-h-screen grid place-items-center">
+      <div className="card border-secondary card-border w-xl h-xl bg-base-100 card-xl shadow-sm">
+        <div className="card-body">
+          <h2 className="card-title">FullName</h2>
+          <p>
+            <input
+              type="text"
+              value={data.fullName}
+              onChange={(e) => setData({ ...data, fullName: e.target.value })}
+              placeholder="fullName..."
+              className="input input-lg w-lg"
+            />
+          </p>
 
-        <label className="label text-xl">FullName</label>
-        <input
-          value={information.fullName}
-          onChange={(e) =>
-            setInformation({ ...information, fullName: e.target.value })
-          }
-          type="text"
-          className="input text-xl w-lg"
-          placeholder="fullName..."
-        />
+          <h2 className="card-title">Email</h2>
+          <p>
+            <input
+              type="email"
+              value={data.email}
+              onChange={(e) => setData({ ...data, email: e.target.value })}
+              placeholder="email..."
+              className="input input-lg w-lg"
+            />
+          </p>
 
-        <label className="label text-xl">Email</label>
-        <input
-          value={information.email}
-          onChange={(e) =>
-            setInformation({ ...information, email: e.target.value })
-          }
-          type="email"
-          className="input text-xl w-lg"
-          placeholder="Email..."
-        />
+          <h2 className="card-title">Password</h2>
+          <p>
+            <input
+              type="password"
+              value={data.password}
+              onChange={(e) => setData({ ...data, password: e.target.value })}
+              placeholder="password..."
+              className="input input-lg w-lg"
+            />
+          </p>
 
-        <label className="label text-xl">Password</label>
-        <input
-          value={information.password}
-          onChange={(e) =>
-            setInformation({ ...information, password: e.target.value })
-          }
-          type="password"
-          className="input w-lg text-xl"
-          placeholder="Password..."
-        />
-
-        <button className="btn btn-primary my-4 text-xl" onClick={handleSignIn}>
-          {loading ? "SigningIn..." : "SignIn"}
-        </button>
-        <Link className="w-full" to="/login">
-          <button className="btn w-full text-lg btn-success ">
-            Already Have An Account Login
-          </button>
-        </Link>
-      </fieldset>
+          <div className="justify-end card-actions">
+            <button
+              className="btn btn-primary w-full mt-3"
+              onClick={handleSignIn}
+            >
+              SignIn
+            </button>
+            <Link to="/login" className="w-full">
+              <button className="btn btn-dash btn-secondary w-full">
+                Already Have An Account Then Login
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
     </main>
   );
 };
 
-export default SignupPage;
+export default SignInPage;
