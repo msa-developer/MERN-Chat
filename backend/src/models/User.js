@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = await mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     fullName: {
       type: String,
@@ -13,8 +13,8 @@ const userSchema = await mongoose.Schema(
     },
     password: {
       type: String,
+      minlenght: 6,
       required: true,
-      minlength: 6,
     },
     profilePic: {
       type: String,
@@ -25,4 +25,5 @@ const userSchema = await mongoose.Schema(
 );
 
 const User = mongoose.model("user", userSchema);
+
 export default User;
