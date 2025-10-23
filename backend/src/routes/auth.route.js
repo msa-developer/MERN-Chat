@@ -5,16 +5,16 @@ import {
   signup,
   updateProfile,
 } from "../controller/auth.controller.js";
-import authenticateUser from "../middleware/authenticateUser.js";
+import { authenticateUser } from "../lib/auth.middleware.js";
 
 const authRouter = express.Router();
 
-authRouter.post("/signup", signup);
-authRouter.post("/login", login);
+authRouter.post("/signIn", signup);
 authRouter.post("/logout", logout);
+authRouter.post("/login", login);
+authRouter.put("/update_profile", authenticateUser, updateProfile);
 authRouter.get("/check", authenticateUser, (req, res) =>
   res.status(200).json(req.user),
 );
-authRouter.put("/update_profile", authenticateUser, updateProfile);
 
 export default authRouter;
