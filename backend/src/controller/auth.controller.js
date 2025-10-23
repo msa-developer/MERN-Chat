@@ -19,6 +19,10 @@ export const signup = async (req, res) => {
         .status(400)
         .json({ message: "Password should be minimum 6 characters" });
 
+    const emailExists = await User.findOne({ email });
+    if (emailExists)
+      return res.status(400).json({ message: "User Already Exists" });
+
     let profileUrl = null;
     if (profilePic) {
       const uploadedProfile = await cloudinary.uploader.upload(profilePic);
@@ -38,15 +42,7 @@ export const signup = async (req, res) => {
     if (newUser) {
       await newUser.save();
       generateToken(newUser._id, res);
-      res.status(201).json({
-        createdAt: newUser.createdAt,
-        updatedAt: newUser.updatedAt,
-        _id: newUser._id,
-        fullName: newUser.fullName,
-        email: newUser.email,
-        password: newUser.password,
-        profilePic: newUser.profilePic,
-      });
+      res.status(201).json(newUser);
     } else {
       res.status(500).json({ message: "Something went wrong" });
     }
