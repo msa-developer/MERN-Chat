@@ -7,7 +7,7 @@ const LoginPage = () => {
     password: "",
   });
 
-  const { login } = useAuth();
+  const { login, loading } = useAuth();
   const handleLogin = () => {
     login(data);
   };
@@ -37,12 +37,22 @@ const LoginPage = () => {
             />
           </p>
           <div className="justify-end card-actions">
-            <button
-              className="btn btn-primary w-full mt-3"
-              onClick={handleLogin}
-            >
-              Login
-            </button>
+            {loading ? (
+              <button
+                className="btn btn-primary w-full mt-3"
+                disabled={loading}
+              >
+                <span className="loading loading-spinner"></span>
+                Login...
+              </button>
+            ) : (
+              <button
+                className="btn btn-primary w-full mt-3"
+                onClick={handleLogin}
+              >
+                Login
+              </button>
+            )}
             <Link to="/singnIn" className="w-full">
               <button className="btn btn-dash btn-secondary w-full">
                 If You're New Then SignIn

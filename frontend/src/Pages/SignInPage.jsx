@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import useAuth from "../zustand/useAuth";
 
 const SignInPage = () => {
-  const { signIn } = useAuth();
+  const { signIn, loading } = useAuth();
   const [data, setData] = useState({
     fullName: "",
     email: "",
@@ -51,12 +51,22 @@ const SignInPage = () => {
           </p>
 
           <div className="justify-end card-actions">
-            <button
-              className="btn btn-primary w-full mt-3"
-              onClick={handleSignIn}
-            >
-              SignIn
-            </button>
+            {loading ? (
+              <button
+                className="btn btn-primary w-full mt-3"
+                disabled={loading}
+              >
+                <span className="loading loading-spinner"></span>
+                Signing In...
+              </button>
+            ) : (
+              <button
+                className="btn btn-primary w-full mt-3"
+                onClick={handleSignIn}
+              >
+                SignIn
+              </button>
+            )}
             <Link to="/login" className="w-full">
               <button className="btn btn-dash btn-secondary w-full">
                 Already Have An Account Then Login
