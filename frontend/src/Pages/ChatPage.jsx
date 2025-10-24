@@ -1,18 +1,15 @@
-import useAuth from "../zustand/useAuth";
-
 const ChatPage = () => {
-  const { logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-  };
-
   return (
-    <div>
-      <button onClick={handleLogout} className="btn btn-primary">
-        Logout
-      </button>
-    </div>
+    <main className="h-screen">
+      <div className="carousel border-primary border-2 carousel-vertical carousel-end rounded-box h-full w-80">
+        {/* Left Side Part of the Screen -> Slide Bar */}
+        <div className="carousel-item h-full">
+          {/* <img src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp" /> */}
+          <button cassName="btn btn-primary"></button>
+        </div>
+        {/* Rigth side Chat Page */}
+      </div>
+    </main>
   );
 };
 
