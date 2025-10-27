@@ -9,15 +9,15 @@ export const SignIn = async (req, res) => {
     if (!fullName || !email || !password)
       return res.status(400).json({ message: "Please fill all the details" });
 
-    if (password.length < 6)
-      return res
-        .status(400)
-        .json({ message: "Password must be minimum 6 characters" });
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({ message: "Invalid Email" });
     }
+
+    if (password.length < 6)
+      return res
+        .status(400)
+        .json({ message: "Password must be minimum 6 characters" });
 
     const salt = await bcrypt.salt(10);
     const hashPass = await bcrypt.hash(password, salt);
@@ -42,20 +42,20 @@ export const SignIn = async (req, res) => {
 };
 
 export const Login = async (req, res) => {
-  const { fullName, email } = req.body;
+  const { password, email } = req.body;
   try {
-    if (!fullName || !email)
+    if (!password || !email)
       return res.status(400).json({ message: "Please fill all the details" });
-
-    if (password.length < 6)
-      return res
-        .status(400)
-        .json({ message: "Password must be minimum 6 characters" });
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({ message: "Invalid Email" });
     }
+
+    if (password.length < 6)
+      return res
+        .status(400)
+        .json({ message: "Password must be minimum 6 characters" });
 
     const user = await User.findOne({ email });
     if (!user)
