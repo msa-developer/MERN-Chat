@@ -19,7 +19,11 @@ export const SignIn = async (req, res) => {
         .status(400)
         .json({ message: "Password must be minimum 6 characters" });
 
-    const salt = await bcrypt.salt(10);
+    const emailExists = await User.findOne({ email });
+    if (emailExists)
+      return res.status(400).json({ message: "Email Already In Use" });
+
+    const salt = await bcrypt.genSalt(10);
     const hashPass = await bcrypt.hash(password, salt);
 
     const newUser = new User({
@@ -29,9 +33,10 @@ export const SignIn = async (req, res) => {
     });
 
     if (newUser) {
-      await newUser.save();
+      const savedUser = await newUser.save();
       generateToken(newUser._id, res);
-      res.status(201).json(newUser);
+      console.log(savedUser);
+      res.status(201).json(savedUser);
     } else {
       res.status(500).json({ message: "Something went wrong" });
     }

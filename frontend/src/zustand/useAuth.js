@@ -39,7 +39,7 @@ export const useAuth = create((set, get) => ({
     try {
       const res = await axiosInstance.post("/auth/signin", information);
       set({ user: res.data });
-      toast.success(`${res.data.full} Siggned In Successfully`);
+      toast.success(`${res.data.fullName} Siggned In Successfully`);
     } catch (e) {
       toast.error(e.response?.data?.message);
     } finally {
