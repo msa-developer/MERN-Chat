@@ -5,8 +5,10 @@ import authRouter from "./routes/auth.route.js";
 import connectdb from "./db.js";
 import messageRouter from "./routes/message.route.js";
 import cors from "cors";
+import path from "path";
 
 dotenv.config();
+const __dirname = path.resolve();
 const app = express();
 
 app.use(
@@ -15,6 +17,13 @@ app.use(
     credentials: true,
   }),
 );
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  app.get(/.*/, (_, res) =>
+    res.sendFile(path.join(__dirname, "../frontend/dist/index.html")),
+  );
+}
 
 app.use(cookieParser());
 app.use(express.json());
