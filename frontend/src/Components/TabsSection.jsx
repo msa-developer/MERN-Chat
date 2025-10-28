@@ -1,30 +1,59 @@
-const TabsSection = () => {
-  return (
-    <div>
-      {/* name of each tab group should be unique */}
-      <div className="tabs tabs-box">
-        <input
-          type="radio"
-          name="my_tabs_6"
-          className="tab tab-xl px-8 py-4 text-xl"
-          aria-label="Chats"
-        />
-        <div className="tab-content bg-base-100 border-base-300 p-6 w-full">
-          Tab content 1
-        </div>
+import { useChat } from "../zustand/useChat";
+import Loading from "../Components/Loading.jsx";
+import { useState } from "react";
 
-        <input
-          type="radio"
-          name="my_tabs_6"
-          className="tab tab-xl px-8 py-4 text-xl"
-          aria-label="Contacts"
-          defaultChecked
-        />
-        <div className="tab-content bg-base-100 border-base-300 p-6">
-          Tab content 2
-        </div>
+const TabsSection = () => {
+  const { proceding, partners, Partners, Contacts, contacts } = useChat();
+  const [active, setActive] = useState("chats");
+
+  return (
+    <main className="h-[80%]">
+      <div className="flex  gap-2 flex-wrap m-4 mx-auto justify-around">
+        <button
+          onClick={() => {
+            setActive("chats");
+            Partners();
+          }}
+          className={`btn hover:btn-soft ${active === "chats" ? "btn-primary" : ""}`}
+        >
+          Chats
+        </button>
+
+        <button
+          onClick={() => {
+            setActive("contacts");
+            Contacts();
+          }}
+          className={`btn ${active === "contacts" ? "btn-primary" : ""}`}
+        >
+          Contacts
+        </button>
       </div>
-    </div>
+
+      <div className="h-full flex flex-col overflow-y-auto">
+        {proceding ? (
+          <Loading />
+        ) : (
+          <>
+            {contacts.map((item) => {
+              return (
+                <button key={item._id} className="btn btn-info">
+                  {item.fullName}
+                </button>
+              );
+            })}
+
+            {partners.map((item) => {
+              return (
+                <button key={item._id} className="btn btn-info">
+                  {item.fullName}
+                </button>
+              );
+            })}
+          </>
+        )}
+      </div>
+    </main>
   );
 };
 

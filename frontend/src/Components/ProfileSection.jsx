@@ -7,8 +7,8 @@ const ProfileSection = () => {
     logout();
   };
   return (
-    <div className="flex justify-between mt-1 h-1/12 items-center w-full">
-      <div className="flex justify-between items-center">
+    <div className="flex flex-wrap justify-between mt-1 h-1/12 items-center w-full">
+      <div className="flex flex-wrap justify-between items-center">
         <div className="bg-neutral grid place-content-center text-neutral-content w-14 h-14 rounded-full">
           <span className="text-2xl">
             {user.fullName
@@ -22,7 +22,7 @@ const ProfileSection = () => {
         <span className="text-2xl">{user.fullName}</span>
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <button
           onClick={handleLogout}
           disabled={loggingOut}
