@@ -3,7 +3,7 @@ import TabsSection from "../Components/TabsSection.jsx";
 
 const Slidebar = () => {
   return (
-    <div className="relative carousel p-2 bg-base-200 border-base-300 rounded-box md:w-sm w-1/4 flex flex-col ">
+    <div className="w-full sm:w-1/2 lg:w-1/3 min-h-screen  flex flex-col p-3 bg-base-200 border border-base-300 rounded-box">
       <ProfileSection />
       <TabsSection />
     </div>

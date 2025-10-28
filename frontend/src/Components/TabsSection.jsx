@@ -8,8 +8,8 @@ const TabsSection = () => {
   const [active, setActive] = useState("chats");
 
   return (
-    <main className="h-[80%]">
-      <div className="flex  gap-2 flex-wrap  m-4 mx-auto justify-around">
+    <main className="flex-1 min-h-[400px]">
+      <div className="flex  gap-2 flex-wrap   m-4 mx-auto justify-around">
         <button
           onClick={() => {
             setActive("chats");

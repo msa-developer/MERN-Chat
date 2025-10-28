@@ -7,7 +7,7 @@ const ProfileSection = () => {
     logout();
   };
   return (
-    <div className="flex flex-wrap justify-between mt-1 h-1/12 items-center w-full">
+    <div className="flex flex-wrap justify-between mt-1 items-center w-full">
       <div className="flex flex-wrap justify-between items-center">
         <div className="bg-neutral grid place-content-center text-neutral-content w-14 h-14 rounded-full">
           <span className="text-2xl">
