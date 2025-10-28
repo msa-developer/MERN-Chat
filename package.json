@@ -1,0 +1,22 @@
+{
+  "name": "realtimechatapplication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run dev --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msa-developer/MERN-Chat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/msa-developer/MERN-Chat/issues"
+  },
+  "homepage": "https://github.com/msa-developer/MERN-Chat#readme"
+}
