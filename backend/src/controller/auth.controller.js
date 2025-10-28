@@ -35,7 +35,6 @@ export const SignIn = async (req, res) => {
     if (newUser) {
       const savedUser = await newUser.save();
       generateToken(newUser._id, res);
-      console.log(savedUser);
       res.status(201).json(savedUser);
     } else {
       res.status(500).json({ message: "Something went wrong" });

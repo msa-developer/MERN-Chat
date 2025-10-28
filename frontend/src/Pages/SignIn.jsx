@@ -11,10 +11,6 @@ const SignIn = () => {
 
   const { signin, signingIn } = useAuth();
 
-  const handleSubmit = () => {
-    signin(data);
-  };
-
   return (
     <main className="min-h-screen grid place-content-center">
       <div className="card border border-primary card-border bg-base-100 w-2xl">
@@ -54,7 +50,9 @@ const SignIn = () => {
 
           <div className="card-actions w-full">
             <button
-              onClick={handleSubmit}
+              onClick={() => {
+                signin(data);
+              }}
               disabled={signingIn}
               className="btn btn-primary w-full mt-5"
             >

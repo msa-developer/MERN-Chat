@@ -1,11 +1,13 @@
 import ChatSection from "../Components/ChatSection";
 import Slidebar from "../Components/Slidebar";
+import { useChat } from "../zustand/useChat";
 
 const Chat = () => {
+  const { selectedUser } = useChat();
   return (
     <main className="h-screen w-full flex ">
       <Slidebar />
-      <ChatSection />
+      {selectedUser ? <ChatSection /> : null}
     </main>
   );
 };

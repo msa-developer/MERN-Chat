@@ -8,8 +8,11 @@ export const useChat = create((set, get) => ({
   message: [],
   proceding: false,
   activeTab: "chats",
+  selectedUser: null,
 
   ChangeTabs: (tab) => set({ activeTab: tab }),
+
+  setSelectedUser: (user) => set({ selectedUser: user }),
 
   Contacts: async () => {
     set({ proceding: true });

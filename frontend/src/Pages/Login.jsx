@@ -9,14 +9,14 @@ const Login = () => {
     password: "",
   });
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    login(data);
-  };
-
   return (
     <div className="min-h-screen grid place-content-center">
-      <form onSubmit={handleLogin}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          login(data);
+        }}
+      >
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-lg h-lg border p-4">
           <legend className="fieldset-legend text-xl">Login</legend>
 

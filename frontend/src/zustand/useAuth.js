@@ -8,12 +8,12 @@ export const useAuth = create((set, get) => ({
   loggingIn: false,
   loggingOut: false,
   signingIn: false,
+  uploading: false,
 
   checkAuthentication: async () => {
     try {
       set({ loading: true });
       const res = await axiosInstance.get("/auth/check");
-      set({ data: res.data });
       set({ user: res.data });
     } catch (e) {
     } finally {
@@ -26,7 +26,6 @@ export const useAuth = create((set, get) => ({
     try {
       const res = await axiosInstance.post("/auth/login", information);
       set({ user: res.data });
-      toast.success(`${res.data.fullName} logged In Successfully`);
     } catch (e) {
       toast.error(e.response?.data?.message);
     } finally {
@@ -39,7 +38,6 @@ export const useAuth = create((set, get) => ({
     try {
       const res = await axiosInstance.post("/auth/signin", information);
       set({ user: res.data });
-      toast.success(`${res.data.fullName} Siggned In Successfully`);
     } catch (e) {
       toast.error(e.response?.data?.message);
     } finally {
@@ -51,13 +49,23 @@ export const useAuth = create((set, get) => ({
     try {
       set({ loggingOut: true });
       await axiosInstance.post("/auth/logout");
-      const user = get().user;
-      toast.success(`${user.fullName} logged Out Successfully`);
       set({ user: null });
     } catch (e) {
       toast.error(e.response?.data?.message);
     } finally {
       set({ loggingOut: false });
+    }
+  },
+
+  updateProfile: async (data) => {
+    set({ uploading: false });
+    try {
+      await axiosInstance.put("/auth/updat_profile", data);
+      toast.success("updated profile Successfully");
+    } catch (e) {
+      toast.error(e.response?.data?.message);
+    } finally {
+      set({ uploading: true });
     }
   },
 }));
