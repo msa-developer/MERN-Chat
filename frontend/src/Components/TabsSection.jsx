@@ -1,6 +1,7 @@
 import { useChat } from "../zustand/useChat";
 import Loading from "../Components/Loading.jsx";
 import { useState } from "react";
+import { Link } from "react-router";
 
 const TabsSection = () => {
   const { proceding, partners, Partners, Contacts, contacts } = useChat();
@@ -8,13 +9,13 @@ const TabsSection = () => {
 
   return (
     <main className="h-[80%]">
-      <div className="flex  gap-2 flex-wrap m-4 mx-auto justify-around">
+      <div className="flex  gap-2 flex-wrap  m-4 mx-auto justify-around">
         <button
           onClick={() => {
             setActive("chats");
             Partners();
           }}
-          className={`btn hover:btn-soft ${active === "chats" ? "btn-primary" : ""}`}
+          className={`btn  hover:btn-soft ${active === "chats" ? "btn-primary" : ""}`}
         >
           Chats
         </button>
@@ -24,7 +25,7 @@ const TabsSection = () => {
             setActive("contacts");
             Contacts();
           }}
-          className={`btn ${active === "contacts" ? "btn-primary" : ""}`}
+          className={`btn  ${active === "contacts" ? "btn-primary" : ""}`}
         >
           Contacts
         </button>
@@ -35,21 +36,37 @@ const TabsSection = () => {
           <Loading />
         ) : (
           <>
-            {contacts.map((item) => {
-              return (
-                <button key={item._id} className="btn btn-info">
-                  {item.fullName}
-                </button>
-              );
-            })}
-
-            {partners.map((item) => {
-              return (
-                <button key={item._id} className="btn btn-info">
-                  {item.fullName}
-                </button>
-              );
-            })}
+            {active === "chats" ? (
+              <>
+                {partners.map((item) => {
+                  return (
+                    <Link className="w-full " to={`${item._id}`}>
+                      <button
+                        key={item._id}
+                        className="btn mt-1 w-full btn-info"
+                      >
+                        {item.fullName}
+                      </button>
+                    </Link>
+                  );
+                })}
+              </>
+            ) : (
+              <>
+                {contacts.map((item) => {
+                  return (
+                    <Link className="w-full " to={`${item._id}`}>
+                      <button
+                        key={item._id}
+                        className="btn mt-1 w-full btn-info"
+                      >
+                        {item.fullName}
+                      </button>
+                    </Link>
+                  );
+                })}
+              </>
+            )}
           </>
         )}
       </div>
