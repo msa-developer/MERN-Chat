@@ -7,6 +7,9 @@ export const useChat = create((set, get) => ({
   partners: [],
   message: [],
   proceding: false,
+  activeTab: "chats",
+
+  ChangeTabs: (tab) => set({ activeTab: tab }),
 
   Contacts: async () => {
     set({ proceding: true });
