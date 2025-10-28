@@ -10,13 +10,10 @@ const ProfileSection = () => {
 
   const handleImageUpload = (e) => {
     const file = e.target.file[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
+    const reader = new FileReader(file);
     reader.onloadend = async () => {
-      const base64Image = reader.result;
-      setSelectedImg(base64Image);
-      await updateProfile();
+      const bit64Image = reader.result;
+      updateProfile(bit64Image);
     };
   };
 
@@ -25,7 +22,7 @@ const ProfileSection = () => {
   return (
     <div className="flex flex-wrap justify-around mt-1 items-center w-full">
       <div className="flex flex-wrap items-center">
-        <div className="avatar online gap-3 items-center flex">
+        <div className="avatar online gap-1 items-center flex">
           <button
             onClick={() => fileInput.current.click()}
             className="w-24 overflow-hidden rounded-full"
@@ -48,11 +45,9 @@ const ProfileSection = () => {
             className="hidden"
           />
 
-          <div>
-            <h3 className="text-base text-center max-w-[180px] font-medium text-slate-200 truncate">
-              {user.fullName}
-            </h3>
-          </div>
+          <h3 className="text-base text-center max-w-[180px] font-medium text-slate-200 truncate">
+            {user.fullName}
+          </h3>
         </div>
       </div>
 
