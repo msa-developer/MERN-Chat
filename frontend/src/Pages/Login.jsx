@@ -9,6 +9,10 @@ const Login = () => {
     password: "",
   });
 
+  const handleChange = (e) => {
+    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   return (
     <div className="min-h-screen grid place-content-center">
       <form
@@ -24,8 +28,9 @@ const Login = () => {
           <input
             type="email"
             className="input w-sm"
+            name="email"
             value={data.email}
-            onChange={(e) => setData({ ...data, email: e.target.value })}
+            onChange={handleChange}
             placeholder="Email"
           />
 
@@ -33,9 +38,10 @@ const Login = () => {
           <input
             type="password"
             className="input w-sm"
+            name="password"
             placeholder="Password"
             value={data.password}
-            onChange={(e) => setData({ ...data, password: e.target.value })}
+            onChange={handleChange}
           />
 
           <button
