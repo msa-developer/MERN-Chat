@@ -5,15 +5,15 @@ import { useRef, useState } from "react";
 const ProfileSection = () => {
   const { loggingOut, logout, user, updateProfile } = useAuth();
   const [selectedImg, setSelectedImg] = useState(null);
-  const fileInput = useRef(null);
-  console.log("user is ", user);
+
+  const inputRef = useRef(null);
 
   const handleImageUpload = (e) => {
     const file = e.target.file[0];
     const reader = new FileReader(file);
     reader.onloadend = async () => {
-      const base64Image = reader.result;
-      await updateProfile(base64Image);
+      const bit64Image = reader.result;
+      await updateProfile(bit64Image);
     };
   };
 
@@ -24,8 +24,8 @@ const ProfileSection = () => {
       <div className="flex flex-wrap items-center">
         <div className="avatar online gap-1 items-center flex">
           <button
-            onClick={() => fileInput.current.click()}
             className="w-24 overflow-hidden rounded-full"
+            onClick={inputRef.current.onclick()}
           >
             {selectedImg || user.profile ? (
               <img
@@ -38,11 +38,11 @@ const ProfileSection = () => {
             )}
           </button>
           <input
+            className="hidden"
             type="file"
             accept="image/*"
-            ref={fileInput}
+            ref={inputRef}
             onChange={handleImageUpload}
-            className="hidden"
           />
 
           <h3 className="text-base text-center max-w-[180px] font-medium text-slate-200 truncate">
