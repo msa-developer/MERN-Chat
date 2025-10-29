@@ -12,8 +12,8 @@ const ProfileSection = () => {
     const file = e.target.file[0];
     const reader = new FileReader(file);
     reader.onloadend = async () => {
-      const bit64Image = reader.result;
-      updateProfile(bit64Image);
+      const base64Image = reader.result;
+      await updateProfile(base64Image);
     };
   };
 

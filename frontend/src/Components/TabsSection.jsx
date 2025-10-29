@@ -55,14 +55,9 @@ const TabsSection = () => {
               <>
                 {contacts.map((item) => {
                   return (
-                    <Link className="w-full " to={`${item._id}`}>
-                      <button
-                        key={item._id}
-                        className="btn mt-1 w-full btn-info"
-                      >
-                        {item.fullName}
-                      </button>
-                    </Link>
+                    <button key={item._id} className="btn mt-1 btn-info">
+                      {item.fullName}
+                    </button>
                   );
                 })}
               </>
