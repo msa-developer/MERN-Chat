@@ -16,7 +16,7 @@ const App = () => {
   if (loading) return <Loading />;
 
   return (
-    <div className="min-h-screen" data-theme="night">
+    <div className="min-h-screen relative" data-theme="night">
       <Routes>
         <Route
           path={"/"}
