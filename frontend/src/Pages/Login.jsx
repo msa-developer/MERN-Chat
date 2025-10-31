@@ -14,20 +14,21 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen grid place-content-center">
+    <div className="h-screen grid place-content-center relative">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           login(data);
         }}
+        className="w-sm max-w-md max-auto"
       >
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-lg h-lg border p-4">
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
           <legend className="fieldset-legend text-xl">Login</legend>
 
-          <label className="label text-lg">Email</label>
+          <label className="label text-xs sm:text-lg">Email</label>
           <input
             type="email"
-            className="input w-sm"
+            className="input w-full"
             name="email"
             value={data.email}
             onChange={handleChange}
@@ -37,7 +38,7 @@ const Login = () => {
           <label className="label text-lg">Password</label>
           <input
             type="password"
-            className="input w-sm"
+            className="input w-full"
             name="password"
             placeholder="Password"
             value={data.password}
