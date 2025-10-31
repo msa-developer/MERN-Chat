@@ -12,9 +12,9 @@ const SignIn = () => {
   const { signin, signingIn } = useAuth();
 
   return (
-    <main className="min-h-screen grid place-content-center">
-      <div className="card border border-primary card-border bg-base-100 w-2xl">
-        <div className="card-body">
+    <main className="min-h-screen grid place-content-center p-3">
+      <div className="card border border-primary card-border bg-base-100 lg:w-6xl md:w-2xl  lg:p-3 ">
+        <div className="card-body p-3 md:p-5">
           <h2 className="card-title text-lg">Full Name </h2>
           <p>
             <input
