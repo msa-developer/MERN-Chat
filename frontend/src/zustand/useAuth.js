@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { axiosInstance } from "../lib/axiosInstance";
 import toast from "react-hot-toast";
 
-export const useAuth = create((set, get) => ({
+export const useAuth = create((set) => ({
   user: null,
   loading: false,
   loggingIn: false,
@@ -60,7 +60,8 @@ export const useAuth = create((set, get) => ({
   updateProfile: async (data) => {
     set({ uploading: false });
     try {
-      await axiosInstance.put("/auth/updat_profile", data);
+      const res = await axiosInstance.put("/auth/update_profile", data);
+      set({ user: res.data });
       toast.success("updated profile Successfully");
     } catch (e) {
       toast.error(e.response?.data?.message);

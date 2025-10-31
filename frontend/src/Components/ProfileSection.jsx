@@ -6,18 +6,18 @@ const ProfileSection = () => {
   const { loggingOut, logout, user, updateProfile } = useAuth();
   const [selectedImg, setSelectedImg] = useState(null);
   const fileInput = useRef(null);
-  console.log("user is ", user);
 
   const handleImageUpload = (e) => {
-    const file = e.target.file[0];
-    const reader = new FileReader(file);
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
     reader.onloadend = async () => {
       const base64Image = reader.result;
-      await updateProfile(base64Image);
+      setSelectedImg(base64Image);
+      await updateProfile({ profilePic: base64Image });
     };
   };
-
-  console.log("user full name : ", user.fullName);
 
   return (
     <div className="flex flex-wrap justify-around mt-1 items-center w-full">
@@ -25,9 +25,13 @@ const ProfileSection = () => {
         <div className="avatar online gap-1 items-center flex">
           <button
             onClick={() => fileInput.current.click()}
-            className="w-24 overflow-hidden rounded-full"
+            className="w-24 overflow-hidden rounded-full cursor-pointer relative"
           >
-            {selectedImg || user.profile ? (
+            <div className="absolute rounded-full bg-black/50 opacity-0 hover:opacity-100 w-full h-full text-center content-center">
+              <span className="text-white text-xs font-bold">Change</span>
+            </div>
+
+            {selectedImg || user.profilePic ? (
               <img
                 src={selectedImg || user.profilePic}
                 alt="UserImg"
