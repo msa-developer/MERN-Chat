@@ -20,15 +20,15 @@ const Login = () => {
           e.preventDefault();
           login(data);
         }}
-        className="w-sm max-w-md max-auto"
+        className="md:w-full w-sm max-auto lg:w-2xl relative p-2"
       >
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border md:p-4 md:w-xl lg:w-2xl p-1">
           <legend className="fieldset-legend text-xl">Login</legend>
 
-          <label className="label text-xs sm:text-lg">Email</label>
+          <label className="label text-lg">Email</label>
           <input
             type="email"
-            className="input w-full"
+            className="input w-full "
             name="email"
             value={data.email}
             onChange={handleChange}
