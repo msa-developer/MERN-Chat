@@ -20,15 +20,21 @@ const App = () => {
       <Routes>
         <Route
           path={"/"}
+          element={
+            user ? <Navigate to={"/chat"} /> : <Navigate to={"/login"} />
+          }
+        />
+        <Route
+          path={"/chat"}
           element={user ? <ChatPage /> : <Navigate to={"/login"} />}
         />
         <Route
           path={"/login"}
-          element={!user ? <Login /> : <Navigate to={"/"} />}
+          element={!user ? <Login /> : <Navigate to={"/chat"} />}
         />
         <Route
           path={"/signin"}
-          element={!user ? <SignIn /> : <Navigate to={"/"} />}
+          element={!user ? <SignIn /> : <Navigate to={"/chat"} />}
         />
       </Routes>
     </div>
