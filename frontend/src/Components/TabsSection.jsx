@@ -17,8 +17,6 @@ const TabsSection = () => {
     setSelectedUser,
   } = useChat();
 
-  console.log("selcted User is : ", selectedUser);
-
   useEffect(() => {
     Partners();
   }, []);
@@ -47,7 +45,7 @@ const TabsSection = () => {
         </button>
       </div>
 
-      <div className="h-full flex  flex-col overflow-y-auto ">
+      <div className="flex flex-col overflow-y-scroll h-[90%]  ">
         {proceding ? (
           <Loading />
         ) : (
@@ -60,12 +58,16 @@ const TabsSection = () => {
                       <button
                         onClick={() => setSelectedUser(item)}
                         key={item._id}
-                        className={`btn mt-3 hover:btn-info relative p-5 flex justify-start items-center flex-1 align-center
+                        className={`btn mt-3 hover:btn-info relative p-5 flex justify-start items-center h-20 md:h-30  align-center
                         ${selectedUser?._id === item._id ? "btn-primary" : ""} `}
                       >
                         <div className="avatar ">
                           {item.profilePic ? (
-                            <img src={item.profilePic} alt={item.fullName} />
+                            <img
+                              src={item.profilePic}
+                              alt={item.fullName}
+                              className="h-10 w-10 rounded-full md:h-20 md:w-20"
+                            />
                           ) : (
                             <UserRoundPen className="md:size-10" />
                           )}
@@ -83,14 +85,18 @@ const TabsSection = () => {
                       <button
                         onClick={() => setSelectedUser(item)}
                         key={item._id}
-                        className={`btn mt-3 hover:btn-info relative p-5 flex justify-start items-center flex-1 align-center
-                        ${selectedUser?._id === item._id ? "btn-primary" : ""} `}
+                        className={`btn h-20 md:h-30 mt-3 hover:btn-info relative p-5 flex justify-start items-center align-center 
+                          ${selectedUser?._id === item._id ? "btn-primary" : ""} `}
                       >
                         <div
                           className={`avatar avatar-online w-10 h-10 md:w-30 md:h-30 rounded-full grid place-content-center`}
                         >
                           {item.profilePic ? (
-                            <img src={item.profilePic} alt={item.fullName} />
+                            <img
+                              src={item.profilePic}
+                              alt={item.fullName}
+                              className="h-10 w-10 rounded-full md:h-20 md:w-20"
+                            />
                           ) : (
                             <UserRoundPen className="md:size-10" />
                           )}

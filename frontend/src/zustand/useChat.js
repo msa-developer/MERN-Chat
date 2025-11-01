@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 export const useChat = create((set, get) => ({
   contacts: [],
   partners: [],
-  message: [],
+  messages: [],
   proceding: false,
   activeTab: "chats",
   selectedUser: null,
@@ -43,7 +43,7 @@ export const useChat = create((set, get) => ({
     set({ messageLoading: true });
     try {
       const res = await axiosInstance.get(`/message/${id}`);
-      set({ message: res.data });
+      set({ messages: res.data });
     } catch (err) {
       toast.error(err.response?.data?.message);
     } finally {

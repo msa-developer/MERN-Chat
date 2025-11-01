@@ -21,7 +21,7 @@ const ProfileSection = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-around mt-1 items-center w-full">
+    <div className="flex flex-wrap justify-around mt-1 items-center w-full sticky">
       <div className="flex flex-wrap items-center">
         <div className="avatar online gap-1 items-center flex">
           <button
