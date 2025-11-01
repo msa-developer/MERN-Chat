@@ -19,6 +19,9 @@ cloudinary.config({
 const __dirname = path.resolve();
 const app = express();
 
+app.use(cookieParser());
+app.use(express.json());
+
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -32,9 +35,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../frontend/dist/index.html")),
   );
 }
-
-app.use(cookieParser());
-app.use(express.json());
 
 app.use("/api/auth", authRouter);
 app.use("/api/message", messageRouter);
