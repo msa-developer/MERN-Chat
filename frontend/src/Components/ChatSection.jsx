@@ -8,14 +8,19 @@ const ChatSection = () => {
   const { selectedUser, messagesById, messages } = useChat();
   const { user } = useAuth();
 
+  const endOfMessage = React.useRef(null);
+
   React.useEffect(() => {
     if (selectedUser) messagesById(selectedUser._id);
   }, [messagesById, selectedUser]);
 
+  React.useEffect(() => {
+    endOfMessage.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <>
-      <div className="w-full flex flex-col justify-between overflow-y-auto">
-        <ChatHeader />
+      <div className="w-full h-[800px] md:h-[1000px] relative flex flex-col justify-between overflow-y-scroll">
         <section className="px-6 py-6 h-full ">
           {messages.length > 0 ? (
             <>
@@ -35,6 +40,7 @@ const ChatSection = () => {
             </>
           ) : null}
         </section>
+        <div className="bg-black" ref={endOfMessage} />
         <ChatInput />
       </div>
     </>

@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 export const useAuth = create((set) => ({
   user: null,
-  loading: true,
+  loading: false,
   loggingIn: false,
   loggingOut: false,
   signingIn: false,

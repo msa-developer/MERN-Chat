@@ -46,7 +46,7 @@ const ChatInput = () => {
   return (
     <>
       <form onSubmit={handleSendMessage}>
-        <section className="flex gap-2 flex-col md:flex-row justify-center items-center">
+        <section className="flex gap-2 md:w-[530px] lg:w-[1430px] fixed flex-col flex-1 md:flex-row justify-center items-center">
           <div className="flex gap-1 justify-center w-full items-center">
             <input
               ref={fileRef}

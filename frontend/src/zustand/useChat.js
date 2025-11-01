@@ -64,7 +64,7 @@ export const useChat = create((set, get) => ({
     } catch (err) {
       toast.error(err.response?.data?.message);
     } finally {
-      set({ messageSending: true });
+      set({ messageSending: false });
     }
   },
 }));

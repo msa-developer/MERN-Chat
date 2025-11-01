@@ -18,7 +18,7 @@ const ChatHeader = () => {
   }, [selectedUser]);
 
   return (
-    <main className="w-full p-3 relative flex items-center lg:justify-around justify-between">
+    <main className="w-full p-3 fixed flex items-center lg:justify-around justify-between">
       <div className="flex justify-center items-center gap-2">
         <div className="avatar avatar-online">
           {selectedUser?.profilePic ? (
