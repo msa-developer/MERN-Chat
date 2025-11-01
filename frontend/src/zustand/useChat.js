@@ -10,6 +10,7 @@ export const useChat = create((set, get) => ({
   activeTab: "chats",
   selectedUser: null,
   messageLoading: false,
+  messageSending: false,
 
   setActive: (tab) => set({ activeTab: tab }),
 
@@ -52,12 +53,18 @@ export const useChat = create((set, get) => ({
   },
 
   sendMessage: async (data) => {
-    const { selectedUser } = get();
+    const { selectedUser, messages } = get();
+    set({ messageSending: true });
     try {
-      await axiosInstance.post(`/message/send/${selectedUser._id}`, data);
-      set({ messages: [...messages, res.data] });
+      const res = await axiosInstance.post(
+        `/message/send/${selectedUser._id}`,
+        data,
+      );
+      set({ messages: messages.concat(res.data) });
     } catch (err) {
       toast.error(err.response?.data?.message);
+    } finally {
+      set({ messageSending: true });
     }
   },
 }));
