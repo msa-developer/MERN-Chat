@@ -37,4 +37,21 @@ export const useChat = create((set, get) => ({
       set({ proceding: false });
     }
   },
+
+  messagesById: async (id) => {
+    try {
+      const res = await axiosInstance.get(`/message/${id}`);
+      set({ message: res.data });
+    } catch (err) {
+      toast.error(err.response?.data?.message);
+    }
+  },
+
+  sendMessage: async (id, data) => {
+    try {
+      await axiosInstance.post(`/message/send/${id}`, data);
+    } catch (err) {
+      toast.error(err.response?.data?.message);
+    }
+  },
 }));

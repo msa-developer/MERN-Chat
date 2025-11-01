@@ -47,7 +47,7 @@ const TabsSection = () => {
         </button>
       </div>
 
-      <div className="h-full flex  flex-col overflow-y-auto">
+      <div className="h-full flex  flex-col overflow-y-auto bg-black">
         {proceding ? (
           <Loading />
         ) : (
@@ -59,7 +59,8 @@ const TabsSection = () => {
                     <button
                       onClick={() => setSelectedUser(item)}
                       key={item._id}
-                      className="btn mt-3 btn-info btn-soft relative p-5 flex justify-start items-center align-center "
+                      className={`btn mt-3 hover:btn-info relative p-5 flex justify-start items-center flex-1 align-center
+                        ${selectedUser._id === item._id ? "btn-primary" : ""} `}
                     >
                       <div className="avatar ">
                         {item.profilePic ? (
@@ -80,7 +81,8 @@ const TabsSection = () => {
                     <button
                       onClick={() => setSelectedUser(item)}
                       key={item._id}
-                      className="btn mt-3 btn-info btn-soft relative p-5 flex justify-start items-center flex-1 align-center "
+                      className={`btn mt-3 hover:btn-info relative p-5 flex justify-start items-center flex-1 align-center
+                        ${selectedUser._id === item._id ? "btn-primary" : ""} `}
                     >
                       <div
                         className={`avatar avatar-online w-10 h-10 md:w-30 md:h-30 rounded-full grid place-content-center`}
