@@ -9,6 +9,7 @@ export const useChat = create((set, get) => ({
   proceding: false,
   activeTab: "chats",
   selectedUser: null,
+  messageLoading: false,
 
   setActive: (tab) => set({ activeTab: tab }),
 
@@ -39,11 +40,14 @@ export const useChat = create((set, get) => ({
   },
 
   messagesById: async (id) => {
+    set({ messageLoading: true });
     try {
       const res = await axiosInstance.get(`/message/${id}`);
       set({ message: res.data });
     } catch (err) {
       toast.error(err.response?.data?.message);
+    } finally {
+      set({ messageLoading: true });
     }
   },
 

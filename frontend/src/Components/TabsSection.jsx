@@ -60,7 +60,7 @@ const TabsSection = () => {
                       onClick={() => setSelectedUser(item)}
                       key={item._id}
                       className={`btn mt-3 hover:btn-info relative p-5 flex justify-start items-center flex-1 align-center
-                        ${selectedUser._id === item._id ? "btn-primary" : ""} `}
+                        ${selectedUser?._id === item._id ? "btn-primary" : ""} `}
                     >
                       <div className="avatar ">
                         {item.profilePic ? (
@@ -82,7 +82,7 @@ const TabsSection = () => {
                       onClick={() => setSelectedUser(item)}
                       key={item._id}
                       className={`btn mt-3 hover:btn-info relative p-5 flex justify-start items-center flex-1 align-center
-                        ${selectedUser._id === item._id ? "btn-primary" : ""} `}
+                        ${selectedUser?._id === item._id ? "btn-primary" : ""} `}
                     >
                       <div
                         className={`avatar avatar-online w-10 h-10 md:w-30 md:h-30 rounded-full grid place-content-center`}
