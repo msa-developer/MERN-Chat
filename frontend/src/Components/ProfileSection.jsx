@@ -9,6 +9,7 @@ const ProfileSection = () => {
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
+    if (!file) return;
     const reader = new FileReader();
     reader.readAsDataURL(file);
 
@@ -55,17 +56,13 @@ const ProfileSection = () => {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap  gap-2 mt-3">
         <button
           onClick={logout}
           disabled={loggingOut}
           className="btn  btn-outline btn-accent"
         >
           <LogOut size={20} />
-        </button>
-
-        <button className="btn  btn-outline btn-accent">
-          <EllipsisVertical size={20} />
         </button>
       </div>
     </div>

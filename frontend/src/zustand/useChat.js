@@ -10,7 +10,7 @@ export const useChat = create((set, get) => ({
   activeTab: "chats",
   selectedUser: null,
 
-  ChangeTabs: (tab) => set({ activeTab: tab }),
+  setActive: (tab) => set({ activeTab: tab }),
 
   setSelectedUser: (user) => set({ selectedUser: user }),
 

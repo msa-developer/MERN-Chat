@@ -62,7 +62,7 @@ export const useAuth = create((set) => ({
     try {
       const res = await axiosInstance.put("/auth/update_profile", data);
       set({ user: res.data });
-      toast.success("updated profile Successfully");
+      toast.success("updated profile successfully");
     } catch (e) {
       toast.error(e.response?.data?.message);
     } finally {

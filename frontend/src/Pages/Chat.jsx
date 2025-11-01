@@ -5,7 +5,7 @@ import { useChat } from "../zustand/useChat";
 const Chat = () => {
   const { selectedUser } = useChat();
   return (
-    <main className="h-screen w-full flex ">
+    <main className="min-h-screen w-full flex">
       <Slidebar />
       {selectedUser ? <ChatSection /> : null}
     </main>
