@@ -11,11 +11,12 @@ export const useAuth = create((set) => ({
   uploading: false,
 
   checkAuthentication: async () => {
+    set({ loading: true });
     try {
-      set({ loading: true });
       const res = await axiosInstance.get("/auth/check");
       set({ user: res.data });
     } catch (e) {
+      set({ user: null });
     } finally {
       set({ loading: false });
     }
@@ -58,7 +59,7 @@ export const useAuth = create((set) => ({
   },
 
   updateProfile: async (data) => {
-    set({ uploading: false });
+    set({ uploading: true });
     try {
       const res = await axiosInstance.put("/auth/update_profile", data);
       set({ user: res.data });
@@ -66,7 +67,7 @@ export const useAuth = create((set) => ({
     } catch (e) {
       toast.error(e.response?.data?.message);
     } finally {
-      set({ uploading: true });
+      set({ uploading: false });
     }
   },
 }));
