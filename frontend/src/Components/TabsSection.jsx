@@ -54,49 +54,51 @@ const TabsSection = () => {
           <>
             {activeTab === "chats" ? (
               <>
-                {partners.map((item) => {
-                  return (
-                    <button
-                      onClick={() => setSelectedUser(item)}
-                      key={item._id}
-                      className={`btn mt-3 hover:btn-info relative p-5 flex justify-start items-center flex-1 align-center
+                {Array.isArray(partners) &&
+                  partners.map((item) => {
+                    return (
+                      <button
+                        onClick={() => setSelectedUser(item)}
+                        key={item._id}
+                        className={`btn mt-3 hover:btn-info relative p-5 flex justify-start items-center flex-1 align-center
                         ${selectedUser?._id === item._id ? "btn-primary" : ""} `}
-                    >
-                      <div className="avatar ">
-                        {item.profilePic ? (
-                          <img src={item.profilePic} alt={item.fullName} />
-                        ) : (
-                          <UserRoundPen className="md:size-10" />
-                        )}
-                      </div>
-                      <div className="">{item.fullName}</div>
-                    </button>
-                  );
-                })}
+                      >
+                        <div className="avatar ">
+                          {item.profilePic ? (
+                            <img src={item.profilePic} alt={item.fullName} />
+                          ) : (
+                            <UserRoundPen className="md:size-10" />
+                          )}
+                        </div>
+                        <div className="">{item.fullName}</div>
+                      </button>
+                    );
+                  })}
               </>
             ) : (
               <>
-                {contacts.map((item) => {
-                  return (
-                    <button
-                      onClick={() => setSelectedUser(item)}
-                      key={item._id}
-                      className={`btn mt-3 hover:btn-info relative p-5 flex justify-start items-center flex-1 align-center
+                {Array.isArray(contacts) &&
+                  contacts.map((item) => {
+                    return (
+                      <button
+                        onClick={() => setSelectedUser(item)}
+                        key={item._id}
+                        className={`btn mt-3 hover:btn-info relative p-5 flex justify-start items-center flex-1 align-center
                         ${selectedUser?._id === item._id ? "btn-primary" : ""} `}
-                    >
-                      <div
-                        className={`avatar avatar-online w-10 h-10 md:w-30 md:h-30 rounded-full grid place-content-center`}
                       >
-                        {item.profilePic ? (
-                          <img src={item.profilePic} alt={item.fullName} />
-                        ) : (
-                          <UserRoundPen className="md:size-10" />
-                        )}
-                      </div>
-                      <div className="truncate">{item.fullName}</div>
-                    </button>
-                  );
-                })}
+                        <div
+                          className={`avatar avatar-online w-10 h-10 md:w-30 md:h-30 rounded-full grid place-content-center`}
+                        >
+                          {item.profilePic ? (
+                            <img src={item.profilePic} alt={item.fullName} />
+                          ) : (
+                            <UserRoundPen className="md:size-10" />
+                          )}
+                        </div>
+                        <div className="truncate">{item.fullName}</div>
+                      </button>
+                    );
+                  })}
               </>
             )}
           </>
