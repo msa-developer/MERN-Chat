@@ -9,7 +9,7 @@ export const checkAuth = async (req, res, next) => {
 
     const verifyToken = jwt.verify(token, process.env.jwt_secret);
     if (!verifyToken)
-      return res.status(500).json({ message: "Token Is not valid" });
+      return res.status(403).json({ message: "Token Is not valid" });
 
     const user = await User.findById(verifyToken.userId).select("-password");
     req.user = user;
