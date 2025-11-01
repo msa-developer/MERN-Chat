@@ -45,7 +45,7 @@ const TabsSection = () => {
         </button>
       </div>
 
-      <div className="flex flex-col overflow-y-scroll h-[600px] md:h-[890px]  ">
+      <div className="flex flex-col overflow-y-scroll max-h-[600px] md:max-h-[890px]">
         {proceding ? (
           <Loading />
         ) : (

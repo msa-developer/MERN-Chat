@@ -5,8 +5,21 @@ import { SendHorizonal, Upload } from "lucide-react";
 const ChatInput = () => {
   const [text, setText] = React.useState("");
   const { sendMessage, user } = useChat();
+  const [imagePreview, setImagePreview] = React.useState(null);
 
   const fileRef = React.useRef(null);
+
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    if (!text.trim() || !imagePreview) return;
+    sendMessage({
+      text: text.trim(),
+      image: imagePreview,
+    });
+    setText("");
+    setImagePreview("");
+    if (fileRef.current) fileRef.current.value = null;
+  };
 
   return (
     <>
@@ -28,10 +41,7 @@ const ChatInput = () => {
             className="input md:input-lg w-full"
           />
         </div>
-        <div
-          onClick={() => sendMessage(user._id, text)}
-          className="btn bg-red-900 font-bold "
-        >
+        <div onClick={handleSendMessage} className="btn bg-red-900 font-bold ">
           <SendHorizonal />
         </div>
       </section>

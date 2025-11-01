@@ -14,9 +14,9 @@ const ChatSection = () => {
 
   return (
     <>
-      <div className="w-full flex flex-col overflow-y-auto">
+      <div className="w-full flex flex-col justify-between overflow-y-auto">
         <ChatHeader />
-        <section className="px-6 py-6 bg-black ">
+        <section className="px-6 py-6 h-full ">
           {messages.length > 0 ? (
             <>
               {messages.map((msg) => (

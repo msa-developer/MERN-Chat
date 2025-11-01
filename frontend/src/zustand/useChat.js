@@ -51,9 +51,11 @@ export const useChat = create((set, get) => ({
     }
   },
 
-  sendMessage: async (id, data) => {
+  sendMessage: async (data) => {
+    const { selectedUser } = get();
     try {
-      await axiosInstance.post(`/message/send/${id}`, data);
+      await axiosInstance.post(`/message/send/${selectedUser._id}`, data);
+      set({ messages: [...messages, res.data] });
     } catch (err) {
       toast.error(err.response?.data?.message);
     }
