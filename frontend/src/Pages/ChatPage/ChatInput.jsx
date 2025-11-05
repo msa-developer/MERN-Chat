@@ -9,10 +9,13 @@ const ChatInput = () => {
   const imgRef = React.useRef(null);
 
   const handleMessage = () => {
+    if (text === "" && !selectedImg) return;
     sendMessage({
       text: text,
       image: selectedImg,
     });
+    setText("");
+    setSelectedImg(null);
   };
 
   const handleImg = (e) => {

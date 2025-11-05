@@ -8,51 +8,44 @@ export const useChat = create((set, get) => ({
   partners: [],
   contacts: [],
   messages: [],
-  getting: false,
-  messagesLoading: false,
 
   setTab: (tab) => set({ tab: tab }),
   setSelectedUser: (user) => set({ selectedUser: user }),
 
   getContacts: async () => {
-    set({ getting: true });
     try {
       const res = await axiosInstance.get("/message/contacts");
       set({ contacts: res.data });
     } catch (err) {
       toast.error(err?.response?.data?.message);
-    } finally {
-      set({ getting: false });
     }
   },
 
   getPartners: async () => {
-    set({ getting: true });
     try {
       const res = await axiosInstance.get("/message/partners");
       set({ partners: res.data });
     } catch (err) {
       toast.error(err?.response?.data?.message);
-    } finally {
-      set({ getting: false });
     }
   },
 
-  getMessageById: async (id) => {
-    set({ messagesLoading });
+  getMessageById: async () => {
     try {
-      const res = await axiosInstance.get(`/message/${id}`);
+      const res = await axiosInstance.get(`/message/${get().selectedUser._id}`);
       set({ messages: res.data });
     } catch (err) {
       toast.error(err?.response?.data?.message);
-    } finally {
-      set({ messagesLoading: false });
     }
   },
 
   sendMessage: async (data) => {
     try {
-      await axiosInstance.post(`/message/send/${selectedUser?._id}`, data);
+      const res = await axiosInstance.post(
+        `/message/send/${get().selectedUser?._id}`,
+        data,
+      );
+      set((state) => ({ messages: state.messages.concat(res.data) }));
     } catch (err) {
       toast.error(err?.response?.data?.message);
     }

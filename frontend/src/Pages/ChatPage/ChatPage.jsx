@@ -24,7 +24,7 @@ const ChatPage = () => {
         <Slidebar />
       </Activity>
 
-      <section className="flex w-full flex-col relative">
+      <section className="flex w-full flex-col relative pb-20">
         <ChatHeader />
         {selectedUser ? <ChatArea /> : null}
         {selectedUser ? <ChatInput /> : null}

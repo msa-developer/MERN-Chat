@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Message from "../models/Message.js";
+import { v2 as cloudinary } from "cloudinary";
 
 export const getContacts = async (req, res) => {
   try {
@@ -19,15 +20,13 @@ export const getContacts = async (req, res) => {
 export const getMessagesById = async (req, res) => {
   try {
     const message = await Message.find({
-      _id: {
-        $or: [
-          { sendersId: req.user_id, recievers: req.params.id },
-          {
-            sendersId: req.params.id,
-            recieversId: req.user._id,
-          },
-        ],
-      },
+      $or: [
+        { sendersId: req.user_id, recievers: req.params.id },
+        {
+          sendersId: req.params.id,
+          recieversId: req.user._id,
+        },
+      ],
     }).select("-password");
     res.status(200).json(message);
   } catch (err) {
@@ -41,9 +40,10 @@ export const sendMessage = async (req, res) => {
   try {
     let imgUrl = null;
     if (image) {
-      const uploadedImg = await cloudinar.uploader.upload(image);
+      const uploadedImg = await cloudinary.uploader.upload(image);
       imgUrl = uploadedImg.secure_url;
     }
+
     const newMessage = new Message({
       sendersId: req.user._id,
       recieversId: req.params.id,
@@ -67,7 +67,7 @@ export const getPartners = async (req, res) => {
     const partnersIds = [
       ...new Set(
         allMessages.map((msg) =>
-          msg.sendersId === req.user._id.toString()
+          msg.sendersId.toString() === req.user._id.toString()
             ? msg.recieversId.toString()
             : msg.sendersId.toString(),
         ),
