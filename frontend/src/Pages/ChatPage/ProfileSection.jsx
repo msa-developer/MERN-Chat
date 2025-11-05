@@ -21,18 +21,23 @@ const ProfileSection = () => {
   };
 
   return (
-    <div className="p-3 flex justify-around">
-      <button
-        className="btn rounded-full p-3 w-10 h-10 overflow-hidden flex items-center justify-center"
+    <div className="p-3 flex justify-around items-center">
+      <div
+        className="bg-secondary cursor-pointer hover:bg-info rounded-full w-15 h-15 md:w-20 md:h-20 overflow-hidden flex items-center justify-center"
         onClick={() => imgRef.current.click()}
       >
-        <div>
-          {selectedImg || authUser?.profilePic ? (
-            <img src={selectedImg} className="object-cover w-full" />
+        {selectedImg || authUser?.profilePic ? (
+          selectedImg ? (
+            <img src={selectedImg} className="w-full h-full object-cover  " />
           ) : (
-            <UserPen />
-          )}
-        </div>
+            <img
+              src={authUser?.profilePic}
+              className="w-full h-full object-cover "
+            />
+          )
+        ) : (
+          <UserPen className="w-6 h-6" />
+        )}
 
         <input
           type="file"
@@ -41,7 +46,7 @@ const ProfileSection = () => {
           className="hidden"
           ref={imgRef}
         />
-      </button>
+      </div>
 
       <section className="flex gap-2">
         <button onClick={LogoutUser} className="btn hover:btn-soft btn-info">
