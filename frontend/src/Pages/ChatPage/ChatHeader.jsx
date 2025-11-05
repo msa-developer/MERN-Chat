@@ -5,7 +5,7 @@ const ChatHeader = () => {
   const { setShowTrue, show } = useSlide();
 
   return (
-    <div>
+    <section>
       <header>
         {!show && (
           <button className="btn btn-soft btn-secondary" onClick={setShowTrue}>
@@ -13,7 +13,7 @@ const ChatHeader = () => {
           </button>
         )}
       </header>
-    </div>
+    </section>
   );
 };
 

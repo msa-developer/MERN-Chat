@@ -2,6 +2,7 @@ import { PanelRightOpen, PanelRightClose } from "lucide-react";
 import ProfileSection from "./ProfileSection.jsx";
 import TabsSection from "./TabsSection.jsx";
 import { useSlide } from "../../zustand/slide.js";
+import List from "./List.jsx";
 
 const Slidebar = () => {
   const { show } = useSlide();
@@ -10,6 +11,7 @@ const Slidebar = () => {
     <div className="w-full h-screen lg:max-w-1/4 flex flex-col bg-slate-900">
       <ProfileSection />
       <TabsSection />
+      <List />
     </div>
   );
 };

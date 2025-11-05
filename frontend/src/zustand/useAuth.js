@@ -15,7 +15,6 @@ export const useAuth = create((set) => ({
       const res = await axiosInstance.get("/auth/check");
       set({ authUser: res.data });
     } catch (err) {
-      toast.error(err?.response?.data?.message);
     } finally {
       set({ loading: false });
     }
