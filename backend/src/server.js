@@ -5,6 +5,7 @@ import authRouter from "./routes/auth.route.js";
 import connectdb from "./db.js";
 import { v2 as cloudinary } from "cloudinary";
 import cors from "cors";
+import messageRouter from "./routes/message.route.js";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use(
   }),
 );
 app.use("/api/auth", authRouter);
+app.use("/api/message", messageRouter);
 
 connectdb().then(() => {
   app.listen(process.env.PORT, () => {

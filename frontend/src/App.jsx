@@ -3,19 +3,14 @@ import { useAuth } from "./zustand/useAuth";
 import ChatPage from "./Pages/ChatPage/ChatPage.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
 import RegisterPage from "./Pages/RegisterPage.jsx";
-import React, { Activity } from "react";
-import Slidebar from "./Pages/ChatPage/Slidebar.jsx";
-import { useSlide } from "./zustand/slide.js";
+import React from "react";
 
 const App = () => {
   const { authUser, checkAuth } = useAuth();
-  const { show } = useSlide();
 
   React.useEffect(() => {
     checkAuth();
-  }, []);
-
-  console.log("show is : ", show);
+  }, [checkAuth]);
 
   return (
     <main className="min-h-screen" data-theme="garden">
@@ -34,10 +29,6 @@ const App = () => {
           element={!authUser ? <RegisterPage /> : <Navigate to="/" />}
         />
       </Routes>
-
-      <Activity mode={show ? "visible" : "hidden"}>
-        <Slidebar />
-      </Activity>
     </main>
   );
 };
