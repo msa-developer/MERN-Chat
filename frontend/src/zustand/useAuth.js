@@ -1,71 +1,16 @@
 import { create } from "zustand";
-import { axiosInstance } from "../lib/axiosInstance";
+import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 
-export const useAuth = create((set, get) => ({
-  user: null,
-  loading: false,
-  loggingIn: false,
-  loggingOut: false,
-  signingIn: false,
-  uploading: false,
+export const useAuth = create((set) => ({
+  authUser: null,
 
-  checkAuthentication: async () => {
+  checkAuth: async () => {
     try {
-      set({ loading: true });
-      const res = await axiosInstance.get("/auth/check");
-      set({ user: res.data });
-    } catch (e) {
-    } finally {
-      set({ loading: false });
-    }
-  },
-
-  login: async (information) => {
-    set({ loggingIn: true });
-    try {
-      const res = await axiosInstance.post("/auth/login", information);
-      set({ user: res.data });
-    } catch (e) {
-      toast.error(e.response?.data?.message);
-    } finally {
-      set({ loggingIn: false });
-    }
-  },
-
-  signin: async (information) => {
-    set({ signingIn: true });
-    try {
-      const res = await axiosInstance.post("/auth/signin", information);
-      set({ user: res.data });
-    } catch (e) {
-      toast.error(e.response?.data?.message);
-    } finally {
-      set({ signingIn: false });
-    }
-  },
-
-  logout: async () => {
-    try {
-      set({ loggingOut: true });
-      await axiosInstance.post("/auth/logout");
-      set({ user: null });
-    } catch (e) {
-      toast.error(e.response?.data?.message);
-    } finally {
-      set({ loggingOut: false });
-    }
-  },
-
-  updateProfile: async (data) => {
-    set({ uploading: false });
-    try {
-      await axiosInstance.put("/auth/updat_profile", data);
-      toast.success("updated profile Successfully");
-    } catch (e) {
-      toast.error(e.response?.data?.message);
-    } finally {
-      set({ uploading: true });
+      const res = axiosInstance.get("/auth/check");
+      set({ authUser: res.data });
+    } catch (err) {
+      toast.error(err?.response?.data?.message);
     }
   },
 }));
