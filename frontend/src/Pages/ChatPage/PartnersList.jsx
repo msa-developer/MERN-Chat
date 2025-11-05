@@ -20,7 +20,7 @@ const PartnersList = () => {
           {user.profilePic ? (
             <img
               src={user.profilePic}
-              className="object-cover w-20 h-20 rounded-full"
+              className="object-cover w-10 h-10 md:w-20 md:h-20 rounded-full"
             />
           ) : (
             <UserPen size={40} />
