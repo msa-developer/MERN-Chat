@@ -18,7 +18,11 @@ const ChatHeader = () => {
         {selectedUser && (
           <div className="flex justify-between  items-center gap-4 p-3">
             {selectedUser?.profilePic ? (
-              <img src={selectedUser?.profilPic} />
+              <img
+                src={selectedUser?.profilePic}
+                className="rounded-full w-10 h-10 md:w-20 md:h-20"
+                alt={selectedUser.fullName}
+              />
             ) : (
               <UserPen size={50} />
             )}

@@ -8,7 +8,7 @@ const Slidebar = () => {
   const { show } = useSlide();
 
   return (
-    <div className="w-full absolute h-screen lg:max-w-1/4 flex flex-col bg-slate-900">
+    <div className="w-full h-screen lg:max-w-1/4 flex flex-col bg-slate-900">
       <ProfileSection />
       <TabsSection />
       <List />

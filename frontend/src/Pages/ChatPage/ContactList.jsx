@@ -7,7 +7,7 @@ const ContactList = () => {
     useChat();
   React.useEffect(() => {
     getContacts();
-  }, []);
+  }, [getContacts]);
 
   return (
     <>
