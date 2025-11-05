@@ -1,5 +1,6 @@
 import React from "react";
 import { useChat } from "../../zustand/useChat";
+import { UserPen } from "lucide-react";
 
 const ContactList = () => {
   const { selectedUser, setSelectedUser, contacts, getContacts, tab } =
@@ -16,11 +17,17 @@ const ContactList = () => {
           onClick={() => setSelectedUser(user)}
           key={index}
         >
-          <img
-            src={user.profilePic}
-            className="object-cover w-20 h-20 rounded-full"
-          />
-          {user.fullName}
+          {user.profilePic ? (
+            <img
+              src={user.profilePic}
+              className="object-cover w-20 h-20 rounded-full"
+            />
+          ) : (
+            <UserPen size={40} />
+          )}
+          <span className="md:text-lg truncate  max-w-[180px] md:max-w-[400px]">
+            {user.fullName}
+          </span>
         </button>
       ))}
     </>

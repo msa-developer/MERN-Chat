@@ -16,8 +16,17 @@ const PartnersList = () => {
           onClick={() => setSelectedUser(user)}
           key={index}
         >
-          <img src={user.profilePic} />
-          {user.fullName}
+          {user.profilePic ? (
+            <img
+              src={user.profilePic}
+              className="object-cover w-20 h-20 rounded-full"
+            />
+          ) : (
+            <UserPen />
+          )}
+          <span className="md:text-lg truncate  max-w-[180px] md:max-w-[400px]">
+            {user.fullName}
+          </span>
         </button>
       ))}
     </>
