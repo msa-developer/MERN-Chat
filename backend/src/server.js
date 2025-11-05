@@ -6,13 +6,14 @@ import connectdb from "./db.js";
 import { v2 as cloudinary } from "cloudinary";
 import cors from "cors";
 
+dotenv.config();
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-dotenv.config();
 const app = express();
 app.use(express.json({ limit: "15mb" }));
 app.use(cookieParser());

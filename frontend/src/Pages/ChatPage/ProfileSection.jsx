@@ -1,6 +1,7 @@
 import { LogOut, PanelRightOpen, UserPen } from "lucide-react";
 import { useAuth } from "../../zustand/useAuth";
 import React from "react";
+import { useSlide } from "../../zustand/slide";
 
 const ProfileSection = () => {
   const [selectedImg, setSelectedImg] = React.useState(null);
@@ -20,10 +21,12 @@ const ProfileSection = () => {
     };
   };
 
+  const { setShow } = useSlide();
+
   return (
     <div className="p-3 flex justify-around items-center">
       <div
-        className="bg-secondary cursor-pointer hover:bg-info rounded-full w-15 h-15 md:w-20 md:h-20 overflow-hidden flex items-center justify-center"
+        className="bg-secondary avatar  cursor-pointer hover:bg-info rounded-full w-15 h-15 md:w-20 md:h-20 overflow-hidden flex items-center justify-center"
         onClick={() => imgRef.current.click()}
       >
         {selectedImg || authUser?.profilePic ? (
@@ -53,7 +56,7 @@ const ProfileSection = () => {
           <LogOut />
         </button>
 
-        <button onClick={LogoutUser} className="btn hover:btn-soft btn-info">
+        <button className="btn hover:btn-soft btn-info" onClick={setShow}>
           <PanelRightOpen />
         </button>
       </section>
