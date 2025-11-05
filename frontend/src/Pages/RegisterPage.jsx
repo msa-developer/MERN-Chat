@@ -1,4 +1,6 @@
 import React from "react";
+import { useAuth } from "../zustand/useAuth";
+import { Link } from "react-router";
 
 const RegisterPage = () => {
   const [data, setData] = React.useState({
@@ -6,6 +8,8 @@ const RegisterPage = () => {
     email: "",
     password: "",
   });
+
+  const { RegisterUser, registering } = useAuth();
 
   const handleChange = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -54,7 +58,24 @@ const RegisterPage = () => {
           </p>
 
           <div className="card-actions w-full">
-            <button className="btn btn-primary w-full">Register</button>
+            <button
+              className="btn btn-primary w-full md:text-lg"
+              onClick={() => RegisterUser(data)}
+            >
+              {registering ? (
+                <>
+                  <span className="loading loading-spinner loading-sm md:loading-lg"></span>
+                  Registering...
+                </>
+              ) : (
+                "Register"
+              )}
+            </button>
+            <Link to="/login" className="w-full ">
+              <button className="w-full btn btn-soft btn-secondary md:text-lg">
+                If You Already Have An Account Then Login
+              </button>
+            </Link>
           </div>
         </div>
       </div>

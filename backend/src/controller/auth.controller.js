@@ -6,7 +6,7 @@ import { v2 as cloudinary } from "cloudinary";
 export const Register = async (req, res) => {
   const { fullName, email, password } = req.body;
   try {
-    if (!fullName || !email || password)
+    if (!fullName || !email || !password)
       return res.status(400).json({ message: "Please fill all the details" });
 
     if (password.length < 6)
@@ -76,19 +76,17 @@ export const Login = async (req, res) => {
 export const updateProfile = async (req, res) => {
   const { profilePic } = req.body;
   try {
-    if (!profilePic)
-      return res.status(400).json({ message: "Please upload your profile" });
     const uploadedProfile = await cloudinary.uploader.upload(profilePic);
     const profile_url = uploadedProfile.secure_url;
 
-    const user = await User.findByIdAndUpdate(
+    await User.findByIdAndUpdate(
       req.user._id,
       {
         profilePic: profile_url,
       },
       { new: true },
     );
-    res.status(200).json(user);
+    res.status(200).json({ message: "Update Profile SuccessFully" });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Error in updateProfile function" });

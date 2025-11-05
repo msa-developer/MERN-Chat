@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router";
 import { useAuth } from "./zustand/useAuth";
-import ChatPage from "./Pages/ChatPage.jsx";
+import ChatPage from "./Pages/ChatPage/ChatPage.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
 import RegisterPage from "./Pages/RegisterPage.jsx";
 import React from "react";
@@ -10,7 +10,7 @@ const App = () => {
 
   React.useEffect(() => {
     checkAuth();
-  }, [checkAuth]);
+  }, []);
 
   return (
     <div className="min-h-screen" data-theme="garden">
