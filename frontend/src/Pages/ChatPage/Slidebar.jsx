@@ -4,7 +4,7 @@ import TabsSection from "./TabsSection.jsx";
 
 const Slidebar = () => {
   return (
-    <div className="w-full h-screen md:max-w-1/2 lg:max-w-1/4 flex flex-col bg-slate-900">
+    <div className="w-full h-screen lg:max-w-1/4 flex flex-col bg-slate-900">
       <ProfileSection />
       <TabsSection />
     </div>

@@ -21,10 +21,10 @@ const ProfileSection = () => {
     };
   };
 
-  const { setShow } = useSlide();
+  const { setShowFalse } = useSlide();
 
   return (
-    <div className="p-3 flex justify-around items-center">
+    <div className="p-3 flex-wrap flex justify-around items-center">
       <section className="flex justify-around items-center gap-2">
         <div
           className="bg-secondary avatar  cursor-pointer hover:bg-info rounded-full w-15 h-15 md:w-20 md:h-20 overflow-hidden flex items-center justify-center"
@@ -61,7 +61,7 @@ const ProfileSection = () => {
           <LogOut />
         </button>
 
-        <button className="btn hover:btn-soft btn-info" onClick={setShow}>
+        <button className="btn hover:btn-soft btn-info" onClick={setShowFalse}>
           <PanelRightOpen />
         </button>
       </section>

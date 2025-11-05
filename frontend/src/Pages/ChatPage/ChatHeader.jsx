@@ -2,14 +2,16 @@ import { PanelRightClose } from "lucide-react";
 import { useSlide } from "../../zustand/slide";
 
 const ChatHeader = () => {
-  const { setShow } = useSlide();
+  const { setShowTrue, show } = useSlide();
 
   return (
     <div>
       <header>
-        <button className="btn btn-soft btn-secondary" onClick={setShow}>
-          <PanelRightClose />
-        </button>
+        {!show && (
+          <button className="btn btn-soft btn-secondary" onClick={setShowTrue}>
+            <PanelRightClose />
+          </button>
+        )}
       </header>
     </div>
   );
