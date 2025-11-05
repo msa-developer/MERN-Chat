@@ -1,4 +1,4 @@
-import { Activity } from "react";
+import React, { Activity } from "react";
 import { useSlide } from "../../zustand/slide";
 import Slidebar from "./Slidebar";
 import ChatArea from "./ChatArea";
@@ -8,7 +8,16 @@ import { useChat } from "../../zustand/useChat";
 
 const ChatPage = () => {
   const { show } = useSlide();
-  const { selectedUser } = useChat();
+  const { selectedUser, setSelectedUser } = useChat();
+
+  React.useEffect(() => {
+    const removeUser = (e) => {
+      if (e.code === "Escape") setSelectedUser(null);
+    };
+    window.addEventListener("keyup", removeUser);
+    return () => window.removeEventListener("keyup", removeUser);
+  }, [setSelectedUser]);
+
   return (
     <div className="flex w-full h-screen ">
       <Activity mode={show ? "visible" : "hidden"}>
@@ -18,7 +27,7 @@ const ChatPage = () => {
       <section className="flex w-full flex-col relative">
         <ChatHeader />
         {selectedUser ? <ChatArea /> : null}
-        <ChatInput />
+        {selectedUser ? <ChatInput /> : null}
       </section>
     </div>
   );
