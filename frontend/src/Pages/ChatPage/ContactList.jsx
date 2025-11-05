@@ -13,7 +13,7 @@ const ContactList = () => {
     <>
       {contacts.map((user, index) => (
         <button
-          className={`btn p-12 m-2 overflow-hidden btn-dash btn-info ${selectedUser?._id === user._id ? "btn-active" : ""}`}
+          className={`btn  p-12 m-2 overflow-hidden btn-dash btn-info ${selectedUser?._id === user._id ? "btn-active" : ""}`}
           onClick={() => setSelectedUser(user)}
           key={index}
         >
