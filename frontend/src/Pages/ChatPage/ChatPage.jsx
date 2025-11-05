@@ -7,7 +7,7 @@ import ChatHeader from "./ChatHeader";
 const ChatPage = () => {
   const { show } = useSlide();
   return (
-    <div className="flex">
+    <div className="flex w-full h-screen ">
       <Activity mode={show ? "visible" : "hidden"}>
         <Slidebar />
       </Activity>
