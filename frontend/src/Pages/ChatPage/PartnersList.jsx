@@ -1,9 +1,12 @@
 import React from "react";
 import { useChat } from "../../zustand/useChat";
 import { UserPen } from "lucide-react";
+import { useAuth } from "../../zustand/useAuth";
 
 const PartnersList = () => {
   const { partners, selectedUser, setSelectedUser, getPartners } = useChat();
+
+  const { onlineUsers } = useAuth();
 
   React.useEffect(() => {
     getPartners();
@@ -17,16 +20,20 @@ const PartnersList = () => {
           onClick={() => setSelectedUser(user)}
           key={index}
         >
-          {user.profilePic ? (
-            <img
-              src={user.profilePic}
-              className="object-cover w-10 h-10 md:w-20 md:h-20 rounded-full"
-            />
-          ) : (
-            <UserPen size={40} />
-          )}
+          <div
+            className={`avatar ${onlineUsers?.includes(user?._id) ? "avatar-online" : ""} `}
+          >
+            {user.profilePic ? (
+              <img
+                src={user.profilePic}
+                className="object-cover w-10 h-10 md:w-20 md:h-20 rounded-full"
+              />
+            ) : (
+              <UserPen size={40} />
+            )}
+          </div>
           <span className="md:text-lg truncate  max-w-[180px] md:max-w-[400px]">
-            {user.fullName}
+            {user?.fullName}
           </span>
         </button>
       ))}

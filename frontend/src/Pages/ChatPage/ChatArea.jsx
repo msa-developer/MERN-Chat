@@ -3,13 +3,21 @@ import React from "react";
 import { useAuth } from "../../zustand/useAuth.js";
 
 const ChatArea = () => {
-  const { messages, selectedUser, getMessageById } = useChat();
+  const {
+    messages,
+    selectedUser,
+    getMessageById,
+    RealTimeMsg,
+    StopRealTimeMsg,
+  } = useChat();
   const { authUser } = useAuth();
   const scrollRef = React.useRef(null);
 
   React.useEffect(() => {
     getMessageById();
-  }, [selectedUser]);
+    RealTimeMsg();
+    return () => StopRealTimeMsg();
+  }, [RealTimeMsg, StopRealTimeMsg, getMessageById, selectedUser]);
 
   React.useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -22,6 +30,7 @@ const ChatArea = () => {
           ? messages.map((msg, index) => (
               <div
                 className={`chat  ${authUser._id === msg.sendersId ? "chat-end" : "chat-start"}`}
+                key={index}
               >
                 <div key={index} className={`chat-bubble `}>
                   {msg.text}

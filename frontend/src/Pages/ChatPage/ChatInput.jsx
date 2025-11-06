@@ -22,7 +22,7 @@ const ChatInput = () => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadent = () => {
+    reader.onloadend = () => {
       const img = reader.result;
       setSelectedImg(img);
     };

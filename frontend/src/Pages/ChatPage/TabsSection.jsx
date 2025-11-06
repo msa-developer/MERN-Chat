@@ -1,6 +1,6 @@
 import { useChat } from "../../zustand/useChat";
 import PartnersList from "./PartnersList.jsx";
-import ContactList from "./PartnersList.jsx";
+import ContactList from "./ContactList.jsx";
 
 const TabsSection = () => {
   const { tab, setTab } = useChat();
