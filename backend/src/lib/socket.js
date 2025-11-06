@@ -2,6 +2,7 @@ import http from "http";
 import express from "express";
 import { Server } from "socket.io";
 import cors from "cors";
+import { socketAuthenticate } from "./socket.middleware.js";
 
 const app = express();
 
@@ -11,6 +12,8 @@ const io = new Server(server, {
     origin: "http://localhost:5173",
   },
 });
+
+io.use(socketAuthenticate);
 
 const socketMap = {};
 
