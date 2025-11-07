@@ -13,7 +13,7 @@ const App = () => {
   }, [checkAuth]);
 
   return (
-    <main className="min-h-screen" data-theme="garden">
+    <main className="min-h-screen overflow-hidden" data-theme="garden">
       <Routes>
         <Route
           path={"/"}
