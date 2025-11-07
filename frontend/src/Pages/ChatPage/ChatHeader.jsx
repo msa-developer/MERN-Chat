@@ -19,7 +19,6 @@ const ChatHeader = () => {
 
         {selectedUser && (
           <div className={`flex justify-between items-center gap-4 p-3`}>
-            {/* Add relative to this container */}
             <div className="relative">
               {selectedUser?.profilePic ? (
                 <img
