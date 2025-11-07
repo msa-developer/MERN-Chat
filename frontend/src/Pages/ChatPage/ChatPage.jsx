@@ -19,7 +19,7 @@ const ChatPage = () => {
   }, [setSelectedUser]);
 
   return (
-    <div className="flex w-full h-screen ">
+    <div className="flex w-screen h-screen ">
       <Activity mode={show ? "visible" : "hidden"}>
         <Slidebar />
       </Activity>
