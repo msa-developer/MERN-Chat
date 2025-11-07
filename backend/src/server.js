@@ -5,6 +5,7 @@ import authRouter from "./routes/auth.route.js";
 import connectdb from "./db.js";
 import { v2 as cloudinary } from "cloudinary";
 import cors from "cors";
+import "./lib/cronJob.js";
 import messageRouter from "./routes/message.route.js";
 import { app, server } from "./lib/socket.js";
 import path from "path";
