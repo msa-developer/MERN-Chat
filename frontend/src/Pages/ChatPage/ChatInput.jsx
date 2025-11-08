@@ -11,11 +11,12 @@ const ChatInput = () => {
   const handleMessage = () => {
     if (text === "" && !selectedImg) return;
     sendMessage({
-      text: text,
+      text: text.trim(),
       image: selectedImg,
     });
     setText("");
     setSelectedImg(null);
+    if (imgRef.current) imgRef.current.value = "";
   };
 
   const handleImg = (e) => {
