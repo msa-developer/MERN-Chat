@@ -32,6 +32,18 @@ const ChatArea = () => {
                 className={`chat  ${authUser._id === msg.sendersId ? "chat-end" : "chat-start"}`}
                 key={index}
               >
+                <div className="chat-footer">
+                  <time className="text-xs opacity-80">
+                    {new Date(msg.createdAt).toLocaleDateString("en-US", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: true,
+                    })}{" "}
+                    {new Date(msg.createdAt).toLocaleDateString("en-US", {
+                      weekday: "short",
+                    })}
+                  </time>
+                </div>
                 <div key={index} className={`chat-bubble `}>
                   {msg.text}
                 </div>
