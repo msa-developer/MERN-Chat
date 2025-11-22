@@ -17,7 +17,7 @@ const Slidebar = () => {
       gsap.to(sideRef.current, {
         x: show ? "0" : "-100%",
         ease: "power4.out",
-        duration: 1,
+        duration: 0.3,
       });
     },
     { scope: sideRef, dependencies: [show] },
