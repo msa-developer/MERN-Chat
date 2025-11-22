@@ -20,9 +20,7 @@ const ChatPage = () => {
 
   return (
     <div className="flex w-screen h-screen ">
-      <Activity mode={show ? "visible" : "hidden"}>
-        <Slidebar />
-      </Activity>
+      <Slidebar />
 
       <section className="flex w-full flex-col relative pb-20">
         <ChatHeader />
